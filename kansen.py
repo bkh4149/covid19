@@ -6,17 +6,17 @@ import csv
 import datetime
 
 #定数
-winX = 500              # 広さ
-winY = 400
+winX = 1000              # 広さ
+winY = 1000
 Speed = 10              # 最初の動き
-Population = 300        # 人数
+Population = 1000        # 人数
 Healing_time = 300      # 感染してから治るまでのtick数(1tick = 1hr)
 End_time = 1200         # 時間(1500tick)
 hr_of_day =24           # 24tick=1day
-Medical_resoueces = 10  # 医療資源
+Medical_resoueces = 50  # 医療資源
 Critical_rate = 30      # 重症化率
 Dt_now = datetime.datetime.now()  # ファイル名に使う
-SpeedOfFPS = 40
+SpeedOfFPS = 20
 
 #色
 Infect = (255, 150, 100)
@@ -229,6 +229,7 @@ def main():
             ag.graph(screen)
             #文字表示
             txt = font.render("Self-restraint:"+str((10-spd)*10)+"%", True, (5,5,255))   # 描画する文字列の設定
+            pygame.draw.rect(screen, (255,255,255), Rect(20,100,250,60), )
             screen.blit(txt, [20, 100])# 文字列の表示位置
             #残りの医療資源
             m_left = Medical_resoueces - ag.gr[int(tc/24)][5]
