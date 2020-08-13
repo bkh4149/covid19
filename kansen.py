@@ -6,16 +6,18 @@ import csv
 import datetime
 
 #定数
-winX = 1500              # 広さ
-winY = 1200
+winX = 500              # 広さ
+winY = 400
 Speed = 10              # 最初の動き
 Population = 300        # 人数
 Healing_time = 300      # 感染してから治るまでのtick数(1tick = 1hr)
-End_time = 2400         # 時間(1500tick)
+End_time = 1200         # 時間(1500tick)
 hr_of_day =24           # 24tick=1day
 Medical_resoueces = 10  # 医療資源
 Critical_rate = 30      # 重症化率
 Dt_now = datetime.datetime.now()  # ファイル名に使う
+SpeedOfFPS = 40
+
 #色
 Infect = (255, 150, 100)
 Heavy = (255, 55, 55)
@@ -119,8 +121,8 @@ class aggregage():
         self.ct3a = 0 #重症 (入院中)　　　
 
         # グラフエリア
-        self.x0=100
-        self.y0=500
+        self.x0=50
+        self.y0=200
         self.wx=600
         self.wy=100
         self.max_x= int(End_time/hr_of_day) +1
@@ -202,7 +204,7 @@ def main():
         writer = csv.writer(f)
         save_csv(writer)
         pygame.init()                                 # Pygameの初期化
-        screen = pygame.display.set_mode((winX, winY))  # 800*600の画面
+        screen = pygame.display.set_mode((winX, winY))  # 画面
         font = pygame.font.Font(None, 30)               # フォントの設定
         ck = pygame.time.Clock()
         tc=0    # この世界の時間
@@ -215,7 +217,7 @@ def main():
         mms[33].state = 1
         spd = Speed
         while (1):
-            ck.tick(30) #1秒間で30フレームになるように33msecのwait
+            ck.tick(SpeedOfFPS) #1秒間で30フレームになるように33msecのwait
             screen.fill((255,255,255))  # 画面を白に
             #移動、状態遷移と描画
             for mm in mms:
@@ -253,6 +255,6 @@ def main():
                         if spd <=10:
                             spd +=2 #横方向の速度
             #print(spd)            
-
+    print("死者", ag.ct4)
 if __name__ == "__main__":
     main()
